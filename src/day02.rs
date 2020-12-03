@@ -48,11 +48,8 @@ pub fn part2(input: &[Entry]) -> usize {
              let mut skipped = password_chars.skip((low_idx - 1) as usize);
              let char_1 = skipped.next().expect("ERRNOVAL_1");
              let char_2 = skipped.skip((high_idx - low_idx - 1) as usize).next().expect("ERRNOVAL_2");
-            //  println!("{}\t - ({}/{}) -- ({}/{})", pw, low_idx, char_1, high_idx, char_2);
              (char_1, char_2)
             }))
          .filter(|(x, (f, s))| (x == f || x == s) && f != s)
-        //  .map(|x| {println!("{:?}", x); x})
-        //  .filter(|(e, c)| c >= &e.lowest && c <= &e.highest)
          .count()
 }
