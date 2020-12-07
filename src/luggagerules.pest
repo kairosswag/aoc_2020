@@ -1,0 +1,7 @@
+bag = { ASCII_ALPHA+ ~ SPACE_SEPARATOR ~ ASCII_ALPHA+ }
+amount = { ASCII_DIGIT+ }
+with_content = { amount ~ SPACE_SEPARATOR ~ bag ~ " bag" ~ "s"? ~ (", "|".") }
+no_content = { "no other bags." }
+content = { with_content | no_content }
+line = { bag ~ " bag" ~ "s"? ~ " contain " ~ content* }
+file = { SOI ~ (line ~ ("\r\n" | "\n")*)* ~ EOI }
