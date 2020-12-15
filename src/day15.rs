@@ -10,12 +10,12 @@ pub fn generate(input: &str) -> Vec<usize> {
 
 #[aoc(day15, part1)]
 pub fn part1(starting_numbers: &[usize]) -> usize {
-    calc(2020, starting_numbers)
+    calc2(2020, starting_numbers)
 }
 
 #[aoc(day15, part2)]
 pub fn part2(starting_numbers: &[usize]) -> usize {
-    calc(30000000, starting_numbers)
+    calc2(30000000, starting_numbers)
 }
 
 pub fn calc(max: usize, starting_numbers: &[usize]) -> usize {
@@ -26,6 +26,22 @@ pub fn calc(max: usize, starting_numbers: &[usize]) -> usize {
     let mut recent_spoken = starting_numbers[starting_numbers.len() - 1];
     (starting_numbers.len()..max).fold(recent_spoken, |recent_spoken, i| {
         i - spoken.insert(recent_spoken, i).unwrap_or(i)
+    })
+}
+
+pub fn calc2(max: usize, starting_numbers: &[usize]) -> usize {
+    let mut spoken = vec![0; max];
+    for i in 1..=starting_numbers.len() {
+        spoken[starting_numbers[i - 1]] = i;
+    }
+    let mut recent_spoken = starting_numbers[starting_numbers.len() - 1];
+    (starting_numbers.len()..max).fold(recent_spoken, |recent_spoken, i| {
+        let mut prev = spoken[recent_spoken];
+        spoken[recent_spoken] = i;
+        if prev == 0 {
+            prev = i;
+        }
+        i - prev
     })
 }
 
