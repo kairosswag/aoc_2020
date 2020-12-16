@@ -23,7 +23,7 @@ pub fn calc(max: usize, starting_numbers: &[usize]) -> usize {
     for i in 1..=starting_numbers.len() {
         spoken.insert(starting_numbers[i - 1], i);
     }
-    let mut recent_spoken = starting_numbers[starting_numbers.len() - 1];
+    let recent_spoken = starting_numbers[starting_numbers.len() - 1];
     (starting_numbers.len()..max).fold(recent_spoken, |recent_spoken, i| {
         i - spoken.insert(recent_spoken, i).unwrap_or(i)
     })
@@ -34,7 +34,7 @@ pub fn calc2(max: usize, starting_numbers: &[usize]) -> usize {
     for i in 1..=starting_numbers.len() {
         spoken[starting_numbers[i - 1]] = i;
     }
-    let mut recent_spoken = starting_numbers[starting_numbers.len() - 1];
+    let recent_spoken = starting_numbers[starting_numbers.len() - 1];
     (starting_numbers.len()..max).fold(recent_spoken, |recent_spoken, i| {
         let mut prev = spoken[recent_spoken];
         spoken[recent_spoken] = i;
