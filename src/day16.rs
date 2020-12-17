@@ -1,4 +1,4 @@
-use std::{collections::HashSet, print, vec};
+use std::{collections::HashSet, vec};
 
 use parse_display::{Display, FromStr};
 
